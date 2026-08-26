@@ -1,0 +1,19 @@
+package com.juansoto.workshopmongo.services;
+
+import com.juansoto.workshopmongo.domain.Post;
+import com.juansoto.workshopmongo.repository.PostRepository;
+import com.juansoto.workshopmongo.services.exception.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PostService {
+
+    @Autowired
+    private PostRepository postRepository;
+
+    public Post findById(String id) {
+        return postRepository.findById(id).
+                orElseThrow(()-> new ObjectNotFoundException("Post nao encontrado para o id "+id));
+    }
+}
