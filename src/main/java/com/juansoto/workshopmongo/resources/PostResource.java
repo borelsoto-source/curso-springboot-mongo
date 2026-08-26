@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,9 +24,10 @@ public class PostResource {
     }
 
     @GetMapping("/title")
-    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text") String text,
+                                                  @RequestParam(value = "date") LocalDateTime date){
         text = URL.decodeParam(text);
-        List<Post> list = postService.findByTitle(text);
+        List<Post> list = postService.findByTitle(text,date);
         return ResponseEntity.ok().body(list);
     }
 }

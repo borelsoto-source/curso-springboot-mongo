@@ -6,6 +6,7 @@ import com.juansoto.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,8 +20,8 @@ public class PostService {
                 orElseThrow(()-> new ObjectNotFoundException("Post nao encontrado para o id "+id));
     }
 
-    public List<Post> findByTitle(String text) {
-        return postRepository.searchTitle(text);
+    public List<Post> findByTitle(String text, LocalDateTime date) {
+        return postRepository.searchPost(text, date);
     }
 
 }
